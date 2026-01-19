@@ -42,7 +42,7 @@ Use numbered sections and line breaks for readability.
 
 API_URL = "https://api.openai.com/v1/chat/completions"
 DEFAULT_MODEL = "gpt-4o"
-TIMEOUT_SECONDS = 30
+TIMEOUT_SECONDS = 45
 
 
 def _build_user_message(s: PerformanceSummary) -> str:
@@ -66,7 +66,7 @@ def _chat_completion(api_key: str, system_msg: str, user_msg: str) -> str:
     model = os.environ.get("OPENAI_MODEL", DEFAULT_MODEL)
     payload = json.dumps({
         "model": model,
-        "temperature": 0.7,
+        "temperature": 0.6,
         "messages": [
             {"role": "system", "content": system_msg},
             {"role": "user", "content": user_msg},
