@@ -6,6 +6,21 @@ from models import Trade
 REQUIRED_COLUMNS = {"Entry Date", "Trade P&L ($)", "Trade Return (%)", "R-Multiple"}
 
 
+def _parse_r_multiple(raw_value) -> float | None:
+    if raw_value is None:
+        return None
+
+    if isinstance(raw_value, (int, float)):
+        return float(raw_value)
+
+    text = str(raw_value).strip()
+    if not text:
+        return None
+
+    cleaned = text.removesuffix("R").strip()
+    return float(cleaned) if cleaned else None
+
+
 def read_trades(file_path: str) -> list[Trade]:
     wb = load_workbook(file_path, read_only=True, data_only=True)
     ws = wb.active
@@ -50,7 +65,7 @@ def read_trades(file_path: str) -> list[Trade]:
                 entry_date=entry_date,
                 trade_pnl=float(pnl),
                 trade_return_percent=float(ret),
-                r_multiple=float(r),
+                r_multiple=_parse_r_multiple(r),
             ))
         except (ValueError, TypeError, IndexError):
             skipped += 1

@@ -13,9 +13,14 @@ DEFAULT_CAPITAL = 10_000
 OUTPUT_DIR = "output"
 
 
+def _default_file_path() -> str:
+    desktop_file = os.path.expanduser("~/Desktop/TradeDatabase.xlsx")
+    return desktop_file if os.path.exists(desktop_file) else DEFAULT_FILE
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Trade Journal Analyzer")
-    parser.add_argument("--file", default=DEFAULT_FILE, help="Path to the Excel trade journal")
+    parser.add_argument("--file", default=_default_file_path(), help="Path to the Excel trade journal")
     parser.add_argument("--capital", type=float, default=DEFAULT_CAPITAL, help="Initial capital in dollars")
     parser.add_argument("--skip-llm", action="store_true", help="Skip LLM narrative even if API key is set")
     args = parser.parse_args()
