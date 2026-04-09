@@ -1,5 +1,3 @@
-# Trade Journal Analyzer (Python)
-
 A CLI tool that analyzes historical trade data from an Excel journal and generates performance reports with optional LLM-powered strategy diagnostics.
 
 ## Features
@@ -35,8 +33,8 @@ python main.py --file TradeDatabase.xlsx
 
 | Variable | Description |
 |---|---|
-| `OPENAI_API_KEY` | Required for LLM strategy diagnostics |
-| `OPENAI_MODEL` | Override the default model (default: `gpt-4o`) |
+| `OPENAI_API_KEY` | Your own is required for diagnostics |
+| `OPENAI_MODEL` | Override the default model |
 
 ## Output
 
